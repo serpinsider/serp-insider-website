@@ -43,7 +43,13 @@ export default function Home() {
   );
 }
 
-const ServiceCard = ({ title, description, link }) => (
+interface ServiceCardProps {
+  title: string;
+  description: string;
+  link: string;
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, link }) => (
   <div className="service-card">
     <h3 className="service-title">{title}</h3>
     <p className="service-description">{description}</p>
