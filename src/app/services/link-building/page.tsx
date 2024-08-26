@@ -1,3 +1,5 @@
+'use client';
+import { useEffect } from 'react';
 import Hero from '../../components/Hero';
 import PricingSection from '../../components/PricingSection';
 import ContactSection from '../../components/ContactSection';
@@ -40,16 +42,36 @@ export default function LinkBuildingPage() {
     }
   ];
 
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      e.preventDefault();
+      const target = (e.target as HTMLAnchorElement).getAttribute('href');
+      if (target) {
+        const element = document.querySelector(target);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    const orderButton = document.querySelector('.order-button');
+    orderButton?.addEventListener('click', handleScroll);
+
+    return () => {
+      orderButton?.removeEventListener('click', handleScroll);
+    };
+  }, []);
+
   return (
     <main className="bg-[#1C1C1C] text-white font-sans">
       <Hero 
         title="The #1 Link Building Service for SEO Agencies"
         subtitle="Natural, relevant, in-content links with 100% money-back guarantee"
         primaryButtonText="Order Now"
-        primaryButtonLink="/order"
+        primaryButtonLink="#pricing"
       />
 
-      <PricingSection title="Simple Pricing" options={pricingOptions} />
+      <section id="pricing" className="bg-[#2D2D2D] py-16">
+        <PricingSection title="Simple Pricing" options={pricingOptions} />
+      </section>
 
       {/* How It Works Section */}
       <section className="container mx-auto py-20 px-4">
@@ -92,7 +114,13 @@ export default function LinkBuildingPage() {
 }
 
 // Helper components
-const ProcessStep = ({ number, title, description }) => (
+interface ProcessStepProps {
+  number: number;
+  title: string;
+  description: string;
+}
+
+const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description }) => (
   <div className="text-center">
     <div className="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
       {number}
