@@ -2,32 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    font-family: Helvetica, Arial, sans-serif;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+:root {
+  --color-primary: #1C1C1C;
+  --color-secondary: #2D2D2D;
+  --color-accent: #3B82F6;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .hero-section {
+    @apply py-24 md:py-32 px-4 text-center flex flex-col items-center justify-center min-h-[80vh];
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .hero-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6;
+    background: linear-gradient(to right, #60A5FA, #A78BFA, #F472B6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    @apply text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto;
+  }
+
+  .button-primary {
+    @apply font-bold py-3 px-6 rounded text-base md:text-lg;
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  .button-primary:hover {
+    background-color: #2563EB;
+  }
+
+  .button-secondary {
+    @apply bg-transparent hover:bg-white/10 text-white font-bold py-3 px-6 rounded border-2 border-white text-base md:text-lg;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center;
+  }
+
+  .service-card {
+    @apply p-6 rounded-lg;
+    background-color: var(--color-secondary);
+  }
+
+  .service-title {
+    @apply text-xl md:text-2xl font-bold mb-2;
+  }
+
+  .service-description {
+    @apply text-sm md:text-base mb-4;
+  }
+
+  .link-primary {
+    @apply text-sm md:text-base;
+    color: var(--color-accent);
+  }
+
+  .link-primary:hover {
+    color: #93C5FD;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+    background-color: var(--color-primary);
+    color: white;
   }
 }
